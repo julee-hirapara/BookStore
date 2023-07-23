@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% block content %} 
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<body>
+
+    {% if user != None %}
+    <table>
+        <tr>
+            <td>Users</td>
+        </tr>
+        {% for user in user %}
+        <tr>
+            <td>
+                <h10>{{user.username}}</h10>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form action="" method="post" novalidate>
+        {% csrf_token%}
+        {% if form.non_field_errors %}
+            {% for form in form.non_field_errors %}
+                <p> {{form}} </p>
+            {% endfor %}
+        {% endif %}
+        {% for form in form %}
+            {{form.label_tag}} {{form}} {{form.errors|striptags}}<br><br>
+        {% endfor %}
+             <input type="submit" value="save">
+    </form>
+        
+            <a href="{% url 'changepass' %}">ChangePasswors</a><br>
+            <a href="{% url 'book' %}" class="btn btn-warning">Back</a><br>
+
+
+</body>
+{% endblock content %} 
+
+

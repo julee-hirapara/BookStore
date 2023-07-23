@@ -1,0 +1,55 @@
+
+{% extends 'base.html'%}
+{% block content %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Add Book</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Add">
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h4 class="text-center alert alert-info ">Show Data</h4>
+        {% if books %}
+        <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>BookName</th>
+                    <th>AuthorName</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            {% for book in books %}
+            {% csrf_token %}
+            <tr>
+                <td>{{book.id}}</td>
+                        <td>{{book.book_name.bookName}}</td>
+                        <td>{{book.author_name.name}}</td>
+                        <td ><div class="truncate-text">{{book.description}}</div></td>
+                        <td>{{book.price}}</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="{% url 'update' book.id %}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="{% url 'delete' book.id %}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h4 class="text-center alert alert-warning ">No Records</h4>
+    {% endif %}
+    
+            <a href="{% url 'book' %}" class="btn btn-warning" >Back</a>
+    </div>
+
+{% endblock content %}

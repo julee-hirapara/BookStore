@@ -1,0 +1,109 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrapcss" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>
+<script src="//code.jquery.com/jquery.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<body clas="textcenter">
+<div class="container">
+            <form class="form-horizontal" role="form" method="post">
+				{% csrf_token %}
+                <h2>Registration</h2>
+				<div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">User Name*</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="username" placeholder="User Name" class="form-control" autofocus >
+                        {% for error in form.username.errors %}
+                         <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="first_name" class="col-sm-3 control-label">First Name*</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="first_name" placeholder="First Name" class="form-control" autofocus>
+                        {% for error in form.first_name.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="last_name" class="col-sm-3 control-label">Last Name*</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="last_name" placeholder="Last Name" class="form-control" autofocus>
+                        {% for error in form.last_name.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="col-sm-3 control-label">Email* </label>
+                    <div class="col-sm-9">
+                        <input type="email" name="email" placeholder="Email" class="form-control" name= "email">
+                        {% for error in form.email.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Password*</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="password1" placeholder="Password" class="form-control">
+                        {% for error in form.password1.errors %}
+                        <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Confirm Password*</label>
+                    <div class="col-sm-9">
+                        <input type="password" name="password2" placeholder="Confirm Password" class="form-control">
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9 col-sm-offset-3">
+                        <span class="help-block">*Required fields</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+				<div id="register-link" class="text-right">
+					<p>Have account <a href="{% url 'login' %}" class="text-primary">Login </a> now</p>
+				</div>
+            </form> <!-- /form -->
+        </div> <!-- ./container -->
+	</body>
+{% endblock content %}
+
+
+
+
+
+
+
+<!-- <h1 class="align">Singup</h1>
+    <form action="" method="post" class="center">
+        {% csrf_token%}
+     <table>
+        {% for form in form %}
+        <tr>
+            <td class="trdpadding">{{form.label_tag}}</td>
+            <td class="trdpadding">{{form}}</td>
+            <td class="trdpadding"> {{form.errors|striptags}}</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+    <div class="button">
+            <input type="submit" class="btn btn-success" value="Signup">&nbsp; &nbsp; 
+             <a href="{% url 'login' %}" class="btn btn-warning btn-sm">Login</a>
+    </div>
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    {% csrf_token %}
+    <small {% if message.tags %} class="{{ message.tags}}" {% endif %}>{{message}}</small><br>
+    {% endfor %}
+    {% endif %} -->

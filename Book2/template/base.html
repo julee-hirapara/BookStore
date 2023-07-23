@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    
+</head>
+<body style="padding-top: 0%; padding-left: 3px;">
+        {% if messages %}
+        {% for message in messages %}
+        <h6><small {% if message.tags %} class="{{ message.tags }}" {% endif %} style="color: red; font-size: 20px;">{{ message }}</small></h6>
+        {% endfor %}
+        {% endif %}
+        {% if user.is_authenticated %}
+        <div class="d-flex justify-content-end">
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+        {% endif %}
+        {% block content %} {% endblock content %}
+
+
+    
+
+
+    <script src="{% static 'js/bootstrap.js'%}"></script>
+    <script src="{% static 'js/jquery.js'%}"></script>
+    <script src="{% static 'js/popper.js'%}"></script>
+
+</body>
+</html>
